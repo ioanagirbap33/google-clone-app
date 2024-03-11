@@ -3,7 +3,7 @@ function App() {
   
   return (
     <>
-      <div>Hello</div>
+      <div>Google clone</div>
     </>
   )
 }
