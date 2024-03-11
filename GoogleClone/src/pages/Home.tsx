@@ -15,8 +15,8 @@ const Home = () => {
     <StyledHomeHeader>
       <StyledHeaderWrapper>
         <StyledHeaderRight>
-          <Link to="/gmail">Gmail</Link>
-          <Link to="/Images">Images</Link>
+          <Link to="https://www.google.com/gmail/about/">Gmail</Link>
+          <Link to="https://www.google.com/imghp?hl=ro&ogbl">Images</Link>
           <Tooltip title="Google apps">
             <IconButton>
               <AppsIcon
