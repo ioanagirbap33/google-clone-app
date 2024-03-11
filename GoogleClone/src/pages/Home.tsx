@@ -1,24 +1,19 @@
 import {
-  StyledHeaderLeft,
   StyledHeaderRight,
   StyledHeaderWrapper,
   StyledHomeHeader,
   StyledLogoContainer,
-} from "../components/StyledHomeHeader.tsx";
+} from "../components/Home.Styled.tsx";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import { IconButton } from "@mui/material";
 import AppsIcon from "@mui/icons-material/Apps";
+import SearchInput from "../components/SearchInput.tsx";
 const Home = () => {
   return (
     <StyledHomeHeader>
       <StyledHeaderWrapper>
-        {/* <StyledHeaderLeft>
-          <Link to='/about'>About</Link>
-          <Link to='/store'>Store</Link>
-        </StyledHeaderLeft> */}
-
         <StyledHeaderRight>
           <Link to="/gmail">Gmail</Link>
           <Link to="/Images">Images</Link>
@@ -45,14 +40,17 @@ const Home = () => {
             </Avatar>
           </Tooltip>
         </StyledHeaderRight>
-
-        <StyledLogoContainer>
-          <img
-            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
-            alt="google-logo"
-          ></img>
-        </StyledLogoContainer>
       </StyledHeaderWrapper>
+
+      <StyledLogoContainer>
+        <img
+          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+          alt="google-logo"
+        ></img>
+        <div>
+          <SearchInput />
+        </div>
+      </StyledLogoContainer>
     </StyledHomeHeader>
   );
 };
