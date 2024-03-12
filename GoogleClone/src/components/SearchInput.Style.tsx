@@ -54,6 +54,10 @@ export const StyledButtonContainer = styled("div")<StyledButtonContainerProps>`
     padding: 0 16px;
     margin: 11px 4px;
     cursor: pointer;
+    a {
+      text-decoration: none;
+      color: #e8eaed;
+    }
     &:hover {
       border: 1px solid lightgray;
       border-radius: 4px;

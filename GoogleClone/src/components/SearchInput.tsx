@@ -1,6 +1,6 @@
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   StyledInputWrapper,
   StyledSearchIcon,
@@ -18,7 +18,9 @@ const SearchInput = ({ showButtons = false, searchedValue = "" }) => {
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate(`/search?key=${searchTerm}`);
+    if (searchTerm !== "") {
+      navigate(`/search?key=${searchTerm}`);
+    }
   };
 
   return (
@@ -32,7 +34,9 @@ const SearchInput = ({ showButtons = false, searchedValue = "" }) => {
       </StyledInputWrapper>
       <StyledButtonContainer showButtons={showButtons}>
         <button type="submit">Google Search</button>
-        <button type="submit">I'm feeling lucky</button>
+        <button>
+          <Link to="https://doodles.google/">I'm feeling lucky</Link>
+        </button>
       </StyledButtonContainer>
     </form>
   );

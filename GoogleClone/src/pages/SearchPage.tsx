@@ -133,17 +133,21 @@ const SearchPage = () => {
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
       <StyledSearchContent>
-        {results.map(
-          (r) =>
-            r.search === value && (
-              <div>
-                {r.result.map((res: any) => (
-                  <div>
-                    <Link to={res}>{res}</Link>
-                  </div>
-                ))}
-              </div>
-            )
+        {results.some((r) => r.search === value) ? (
+          results.map(
+            (r) =>
+              r.search === value && (
+                <div>
+                  {r.result.map((res: any) => (
+                    <div>
+                      <Link to={res}>{res}</Link>
+                    </div>
+                  ))}
+                </div>
+              )
+          )
+        ) : (
+          <div>There are no results for your search.</div>
         )}
       </StyledSearchContent>
     </StyledSearchContainer>
