@@ -10,15 +10,17 @@ export const StyledInputWrapper = styled("div")`
   height: 20px;
   padding: 16px 24px;
   margin: 0 auto;
-  margin-top: 24px;
+  margin-top: 20px;
   max-width: 560px;
+  min-width: 300px;
+
   border: 0.1px solid rgb(95, 99, 104);
   border-radius: 999px;
   input {
     flex: 1;
     background-color: rgba(32, 33, 36, 1);
     border: none;
-    padding: 16px 24px;
+    padding: 16px 20px;
     font-size: medium;
     &:focus {
       outline-width: 0;
