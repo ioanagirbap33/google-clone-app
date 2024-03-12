@@ -48,7 +48,7 @@ const Home = () => {
           alt="google-logo"
         ></img>
         <div>
-          <SearchInput />
+          <SearchInput showButtons={true} />
         </div>
       </StyledLogoContainer>
     </StyledHomeHeader>
