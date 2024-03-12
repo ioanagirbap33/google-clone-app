@@ -35,8 +35,12 @@ export const StyledMicIcon = styled(MicIcon)`
   color: #9aa0a6;
   font-size: 1.5rem;
 `;
-export const StyledButtonContainer = styled("div")`
-  display: flex;
+
+interface StyledButtonContainerProps {
+  showButtons: boolean;
+}
+export const StyledButtonContainer = styled("div")<StyledButtonContainerProps>`
+  display: ${(props) => (props.showButtons ? "flex" : "none")};
   justify-content: center;
   padding-top: 18px;
   button {
