@@ -4,13 +4,14 @@ import {
   StyledLogo,
   StyledOptions,
   StyledSearchHeader,
-  StyledSearchHeaderContainer,
+  StyledSearchContainer,
   StyledSearchHeaderLower,
   StyledSearchHeaderUpper,
   StyledSubOptionsLeft,
   StyledSubOptionsMiddle,
   StyledSubOptionsRight,
   StyledSubOptionsText,
+  StyledSearchContent,
 } from "../components/SearchPage.Styled";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../services/firebase";
@@ -53,7 +54,7 @@ const SearchPage = () => {
   const value = queryParams.get("key");
 
   return (
-    <StyledSearchHeaderContainer>
+    <StyledSearchContainer>
       <StyledSearchHeader>
         <StyledSearchHeaderUpper>
           <StyledHeaderLeft>
@@ -131,17 +132,21 @@ const SearchPage = () => {
           </StyledSubOptionsRight>
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
-      {results.map(
-        (r) =>
-          r.search === value && (
-            <div>
-              {r.result.map((res: any) => (
-                <div>{res}</div>
-              ))}
-            </div>
-          )
-      )}
-    </StyledSearchHeaderContainer>
+      <StyledSearchContent>
+        {results.map(
+          (r) =>
+            r.search === value && (
+              <div>
+                {r.result.map((res: any) => (
+                  <div>
+                    <Link to={res}>{res}</Link>
+                  </div>
+                ))}
+              </div>
+            )
+        )}
+      </StyledSearchContent>
+    </StyledSearchContainer>
   );
 };
 

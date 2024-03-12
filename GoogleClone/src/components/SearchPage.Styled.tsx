@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 
-export const StyledSearchHeaderContainer = styled("div")`
+export const StyledSearchContainer = styled("div")`
   display: flex;
   flex-direction: column;
 `;
@@ -91,4 +91,14 @@ export const StyledOptions = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+export const StyledSearchContent = styled("div")`
+  margin-left: 170px;
+  margin-right: 20px;
+  padding: 50px 0px;
+  div {
+    div {
+      padding: 15px 0px;
+    }
+  }
 `;
