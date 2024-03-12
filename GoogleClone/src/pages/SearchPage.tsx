@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   StyledHeaderLeft,
   StyledLogo,
@@ -12,7 +12,7 @@ import {
   StyledSubOptionsRight,
   StyledSubOptionsText,
 } from "../components/SearchPage.Styled";
-import { DocumentData, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import db from "../services/firebase";
 import SearchInput from "../components/SearchInput";
 import { StyledHeaderRight } from "../components/Home.Styled";
@@ -23,8 +23,8 @@ import Avatar from "@mui/material/Avatar";
 
 import { useEffect, useState } from "react";
 interface Result {
-  Input: string;
-  desc: string;
+  search: string;
+  result: string;
   id: string;
 }
 const SearchPage = () => {
@@ -35,7 +35,11 @@ const SearchPage = () => {
     const resultSaved: Result[] = [];
     querySnapshot.forEach((doc) => {
       const data = doc.data();
-      resultSaved.push({ Input: data.Input, desc: data.desc, id: data.id });
+      resultSaved.push({
+        search: data.search,
+        result: data.result,
+        id: data.id,
+      });
     });
     setResults(resultSaved);
   };
@@ -44,7 +48,9 @@ const SearchPage = () => {
     getDataFromFirestore();
   }, []);
 
-  console.log();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const value = queryParams.get("key");
 
   return (
     <StyledSearchHeaderContainer>
@@ -57,7 +63,7 @@ const SearchPage = () => {
                 alt="googlelogo"
               />
             </Link>
-            <SearchInput />
+            <SearchInput searchedValue={value ?? ""} />
           </StyledHeaderLeft>
           <StyledHeaderRight>
             <Tooltip title="Settings">
@@ -125,9 +131,7 @@ const SearchPage = () => {
           </StyledSubOptionsRight>
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
-      {results.map((result) => (
-        <div>{result.id}</div>
-      ))}
+      {results.map((r) => r.search === value && <div>{r.result}</div>)}
     </StyledSearchHeaderContainer>
   );
 };

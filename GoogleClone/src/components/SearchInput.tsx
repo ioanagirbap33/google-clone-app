@@ -8,17 +8,17 @@ import {
   StyledButtonContainer,
 } from "./SearchInput.Style";
 // import { Button } from "@mui/material";
-const SearchInput = ({ showButtons = false }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchInput = ({ showButtons = false, searchedValue = "" }) => {
+  const [searchTerm, setSearchTerm] = useState(searchedValue);
   const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearch = (event: any) => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate(`/search?${searchTerm}`);
+    navigate(`/search?key=${searchTerm}`);
   };
 
   return (
