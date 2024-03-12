@@ -1,0 +1,13 @@
+import { initializeApp } from "firebase/app";
+// import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCqWIhnDoquVfTJ8F8JL2Vw3vDCsAT2wnM",
+  authDomain: "clone-af4b1.firebaseapp.com",
+  projectId: "clone-af4b1",
+  storageBucket: "clone-af4b1.appspot.com",
+  messagingSenderId: "175766240513",
+  appId: "1:175766240513:web:5a8bea76c797ef071eaf00",
+};
+
+const app = initializeApp(firebaseConfig);
