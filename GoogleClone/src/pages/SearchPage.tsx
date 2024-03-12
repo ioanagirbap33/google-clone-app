@@ -1,17 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   StyledHeaderLeft,
   StyledLogo,
   StyledOptions,
   StyledSearchHeader,
-  StyledSearchHeaderContainer,
+  StyledSearchContainer,
   StyledSearchHeaderLower,
   StyledSearchHeaderUpper,
   StyledSubOptionsLeft,
   StyledSubOptionsMiddle,
   StyledSubOptionsRight,
   StyledSubOptionsText,
+  StyledSearchContent,
 } from "../components/SearchPage.Styled";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../services/firebase";
 import SearchInput from "../components/SearchInput";
 import { StyledHeaderRight } from "../components/Home.Styled";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -19,9 +22,39 @@ import AppsIcon from "@mui/icons-material/Apps";
 import { Tooltip, IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 
+import { useEffect, useState } from "react";
+interface Result {
+  search: string;
+  result: string[];
+  id: string;
+}
 const SearchPage = () => {
+  const [results, setResults] = useState<Result[]>([]);
+
+  const getDataFromFirestore = async () => {
+    const querySnapshot = await getDocs(collection(db, "search-results"));
+    const resultSaved: Result[] = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      resultSaved.push({
+        search: data.search,
+        result: data.result,
+        id: data.id,
+      });
+    });
+    setResults(resultSaved);
+  };
+
+  useEffect(() => {
+    getDataFromFirestore();
+  }, []);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const value = queryParams.get("key");
+
   return (
-    <StyledSearchHeaderContainer>
+    <StyledSearchContainer>
       <StyledSearchHeader>
         <StyledSearchHeaderUpper>
           <StyledHeaderLeft>
@@ -31,7 +64,7 @@ const SearchPage = () => {
                 alt="googlelogo"
               />
             </Link>
-            <SearchInput />
+            <SearchInput searchedValue={value ?? ""} />
           </StyledHeaderLeft>
           <StyledHeaderRight>
             <Tooltip title="Settings">
@@ -99,7 +132,25 @@ const SearchPage = () => {
           </StyledSubOptionsRight>
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
-    </StyledSearchHeaderContainer>
+      <StyledSearchContent>
+        {results.some((r) => r.search === value) ? (
+          results.map(
+            (r) =>
+              r.search === value && (
+                <div>
+                  {r.result.map((res: any) => (
+                    <div>
+                      <Link to={res}>{res}</Link>
+                    </div>
+                  ))}
+                </div>
+              )
+          )
+        ) : (
+          <div>There are no results for your search.</div>
+        )}
+      </StyledSearchContent>
+    </StyledSearchContainer>
   );
 };
 
