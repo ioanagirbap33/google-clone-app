@@ -1,9 +1,18 @@
-
+import {
+  StyledHeaderLeft,
+  StyledSearchContainer,
+  StyledSearchHeaderContainer,
+} from "../components/SearchPage.Styled";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   return (
-    <div>SearchPage</div>
-  )
-}
+    <StyledSearchHeaderContainer>
+      <StyledSearchContainer>
+        <StyledHeaderLeft></StyledHeaderLeft>
+      </StyledSearchContainer>
+    </StyledSearchHeaderContainer>
+  );
+};
 
-export default SearchPage
+export default SearchPage;
