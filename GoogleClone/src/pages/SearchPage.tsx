@@ -24,7 +24,7 @@ import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
 interface Result {
   search: string;
-  result: string;
+  result: string[];
   id: string;
 }
 const SearchPage = () => {
@@ -131,7 +131,16 @@ const SearchPage = () => {
           </StyledSubOptionsRight>
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
-      {results.map((r) => r.search === value && <div>{r.result}</div>)}
+      {results.map(
+        (r) =>
+          r.search === value && (
+            <div>
+              {r.result.map((res: any) => (
+                <div>{res}</div>
+              ))}
+            </div>
+          )
+      )}
     </StyledSearchHeaderContainer>
   );
 };
