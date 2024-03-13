@@ -12,7 +12,9 @@ import AppsIcon from "@mui/icons-material/Apps";
 import SearchInput from "../components/SearchInput.tsx";
 import { auth } from "../services/firebase.tsx";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { useState } from "react";
 const Home = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = () => {
@@ -24,6 +26,7 @@ const Home = () => {
         localStorage.setItem("name", name!);
         localStorage.setItem("email", email!);
         localStorage.setItem("profilePic", profilePic!);
+        setIsSignedIn(true);
 
         console.log(result);
       })
@@ -57,10 +60,12 @@ const Home = () => {
       </StyledHeaderWrapper>
 
       <StyledLogoContainer>
-        <img
-          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
-          alt="google-logo"
-        ></img>
+        {isSignedIn && (
+          <img
+            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+            alt="google-logo"
+          ></img>
+        )}
         <div>
           <SearchInput showButtons={true} />
         </div>
