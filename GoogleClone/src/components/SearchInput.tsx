@@ -7,7 +7,6 @@ import {
   StyledMicIcon,
   StyledButtonContainer,
 } from "./SearchInput.Style";
-// import { Button } from "@mui/material";
 const SearchInput = ({ showButtons = false, searchedValue = "" }) => {
   const [searchTerm, setSearchTerm] = useState(searchedValue);
   const navigate = useNavigate();
