@@ -14,6 +14,7 @@ const SearchInput = ({ showButtons = false, searchedValue = "" }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+    console.log("state", searchTerm);
   };
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
