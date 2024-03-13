@@ -31,6 +31,13 @@ export const StyledHeaderRight = styled("div")`
   }
 `;
 
+export const StyledAvatar = styled("img")`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
 export const StyledLogoContainer = styled("div")`
   display: flex;
   //   flex: 1
