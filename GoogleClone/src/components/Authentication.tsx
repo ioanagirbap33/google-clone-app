@@ -5,16 +5,17 @@ import {
   StyledAvatar,
   StyledSignInButton,
 } from "../components/Home.Styled.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../services/firebase.tsx";
 function Authentication() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-
-  if (localStorage !== null) {
-    console.log("full");
-  }
-
+  useEffect(() => {
+    if (localStorage !== null) {
+      setIsSignedIn(true);
+      console.log("Hi");
+    }
+  }, []);
   const provider = new GoogleAuthProvider();
 
   provider.setCustomParameters({
