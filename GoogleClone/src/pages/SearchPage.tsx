@@ -21,8 +21,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AppsIcon from "@mui/icons-material/Apps";
 import { Tooltip, IconButton } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-
 import { useEffect, useState } from "react";
+
 interface Result {
   search: string;
   result: string[];
@@ -30,6 +30,10 @@ interface Result {
 }
 const SearchPage = () => {
   const [results, setResults] = useState<Result[]>([]);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const value = queryParams.get("key");
 
   const getDataFromFirestore = async () => {
     const querySnapshot = await getDocs(collection(db, "search-results"));
@@ -48,10 +52,6 @@ const SearchPage = () => {
   useEffect(() => {
     getDataFromFirestore();
   }, []);
-
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const value = queryParams.get("key");
 
   return (
     <StyledSearchContainer>
@@ -133,10 +133,10 @@ const SearchPage = () => {
         </StyledSearchHeaderLower>
       </StyledSearchHeader>
       <StyledSearchContent>
-        {results.some((r) => r.search === value) ? (
+        {results.some((r) => r.search.includes(value!)) ? (
           results.map(
             (r) =>
-              r.search === value && (
+              r.search.includes(value!) && (
                 <div>
                   {r.result.map((res: any) => (
                     <div>
