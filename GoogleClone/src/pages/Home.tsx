@@ -1,88 +1,23 @@
 import {
-  StyledAvatar,
   StyledHeaderRight,
   StyledHeaderWrapper,
   StyledHomeHeader,
   StyledLogoContainer,
-  StyledSignInButton,
 } from "../components/Home.Styled.tsx";
 import { Link } from "react-router-dom";
-import Tooltip from "@mui/material/Tooltip";
-import { IconButton } from "@mui/material";
-import AppsIcon from "@mui/icons-material/Apps";
+
 import SearchInput from "../components/SearchInput.tsx";
-import { auth } from "../services/firebase.tsx";
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { useState } from "react";
+
+import Authentication from "../components/Authentication.tsx";
 
 const Home = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const provider = new GoogleAuthProvider();
-  //var provider = new Firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: "select_account",
-  });
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const name = result.user.displayName;
-        const email = result.user.email;
-        const profilePic = result.user.photoURL;
-        localStorage.setItem("name", name!);
-        localStorage.setItem("email", email!);
-        localStorage.setItem("profilePic", profilePic!);
-        setIsSignedIn(true);
-
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const signOutWithGoogle = () => {
-    signOut(auth).then(() => {
-      localStorage.clear();
-
-      setIsSignedIn(false);
-    });
-  };
-
-  // const signOutWithGoogle = () => {
-  //   firebase
-  //     .auth()
-  //     .signOut()
-  //     .then(() => {
-  //       setIsSignedIn(false);
-  //       localStorage.clear();
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error signing out:", error);
-  //     });
-  // };
-
   return (
     <StyledHomeHeader>
       <StyledHeaderWrapper>
         <StyledHeaderRight>
           <Link to="https://www.google.com/gmail/about/">Gmail</Link>
           <Link to="https://www.google.com/imghp?hl=ro&ogbl">Images</Link>
-          <Tooltip title="Google apps">
-            <IconButton>
-              <AppsIcon
-                sx={{ fontSize: "1.5rem", color: "rgba(255,255,255,0.87)" }}
-              />
-            </IconButton>
-          </Tooltip>
-          {isSignedIn ? (
-            <Tooltip title="Google account">
-              <StyledAvatar src={localStorage.getItem("profilePic")!} />
-            </Tooltip>
-          ) : (
-            <StyledSignInButton onClick={signInWithGoogle}>
-              Sign in
-            </StyledSignInButton>
-          )}
+          <Authentication />
         </StyledHeaderRight>
       </StyledHeaderWrapper>
 
@@ -95,9 +30,6 @@ const Home = () => {
           <SearchInput showButtons={true} />
         </div>
       </StyledLogoContainer>
-      <div>
-        <button onClick={signOutWithGoogle}>Sign out</button>
-      </div>
     </StyledHomeHeader>
   );
 };
