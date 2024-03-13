@@ -34,12 +34,13 @@ const Home = () => {
         console.log(error);
       });
   };
-  // const signOutWithGoogle = () => {
-  //   signOut(auth).then(() => {
-  //     localStorage.clear();
-  //     console.log("Signed out successfully");
-  //   });
-  // };
+  const signOutWithGoogle = () => {
+    signOut(auth).then(() => {
+      localStorage.clear();
+      console.log("Signed out successfully");
+      setIsSignedIn(false);
+    });
+  };
   return (
     <StyledHomeHeader>
       <StyledHeaderWrapper>
@@ -72,7 +73,7 @@ const Home = () => {
       </StyledLogoContainer>
       <div>
         <button onClick={signInWithGoogle}>Sign in</button>
-        {/* <button onClick={handleLogout}>Sign out</button> */}
+        <button onClick={signOutWithGoogle}>Sign out</button>
         <h1>{localStorage.getItem("name")}</h1>
       </div>
     </StyledHomeHeader>
