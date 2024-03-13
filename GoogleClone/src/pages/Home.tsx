@@ -14,9 +14,14 @@ import SearchInput from "../components/SearchInput.tsx";
 import { auth } from "../services/firebase.tsx";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
+
 const Home = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const provider = new GoogleAuthProvider();
+  //var provider = new Firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -42,6 +47,20 @@ const Home = () => {
       setIsSignedIn(false);
     });
   };
+
+  // const signOutWithGoogle = () => {
+  //   firebase
+  //     .auth()
+  //     .signOut()
+  //     .then(() => {
+  //       setIsSignedIn(false);
+  //       localStorage.clear();
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out:", error);
+  //     });
+  // };
+
   return (
     <StyledHomeHeader>
       <StyledHeaderWrapper>
