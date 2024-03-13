@@ -4,6 +4,7 @@ import {
   StyledHeaderWrapper,
   StyledHomeHeader,
   StyledLogoContainer,
+  StyledSignInButton,
 } from "../components/Home.Styled.tsx";
 import { Link } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
@@ -37,7 +38,7 @@ const Home = () => {
   const signOutWithGoogle = () => {
     signOut(auth).then(() => {
       localStorage.clear();
-      console.log("Signed out successfully");
+
       setIsSignedIn(false);
     });
   };
@@ -54,27 +55,29 @@ const Home = () => {
               />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Google account">
-            <StyledAvatar src={localStorage.getItem("profilePic")!} />
-          </Tooltip>
+          {isSignedIn ? (
+            <Tooltip title="Google account">
+              <StyledAvatar src={localStorage.getItem("profilePic")!} />
+            </Tooltip>
+          ) : (
+            <StyledSignInButton onClick={signInWithGoogle}>
+              Sign in
+            </StyledSignInButton>
+          )}
         </StyledHeaderRight>
       </StyledHeaderWrapper>
 
       <StyledLogoContainer>
-        {isSignedIn && (
-          <img
-            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
-            alt="google-logo"
-          ></img>
-        )}
+        <img
+          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+          alt="google-logo"
+        ></img>
         <div>
           <SearchInput showButtons={true} />
         </div>
       </StyledLogoContainer>
       <div>
-        <button onClick={signInWithGoogle}>Sign in</button>
         <button onClick={signOutWithGoogle}>Sign out</button>
-        <h1>{localStorage.getItem("name")}</h1>
       </div>
     </StyledHomeHeader>
   );
