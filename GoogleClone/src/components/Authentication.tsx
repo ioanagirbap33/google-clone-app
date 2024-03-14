@@ -10,12 +10,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../services/firebase.tsx";
 function Authentication() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  useEffect(() => {
-    if (localStorage !== null) {
-      setIsSignedIn(true);
-      console.log("Hi");
-    }
-  }, []);
+
   const provider = new GoogleAuthProvider();
 
   provider.setCustomParameters({
@@ -46,6 +41,12 @@ function Authentication() {
       setIsSignedIn(false);
     });
   };
+
+  useEffect(() => {
+    if (window.localStorage.length !== 0) {
+      setIsSignedIn(true);
+    }
+  }, []);
 
   return (
     <>
