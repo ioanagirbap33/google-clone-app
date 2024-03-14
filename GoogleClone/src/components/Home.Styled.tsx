@@ -31,6 +31,26 @@ export const StyledHeaderRight = styled("div")`
   }
 `;
 
+export const StyledAvatar = styled("img")`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+export const StyledSignInButton = styled("button")`
+  background-color: #8ab4f8;
+  border: 1px solid transparent;
+  color: #202124;
+  cursor: pointer;
+  width: 96px;
+  height: 36px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Google Sans, Roboto, Helvetica, Arial, sans-serif;
+`;
+
 export const StyledLogoContainer = styled("div")`
   display: flex;
   //   flex: 1

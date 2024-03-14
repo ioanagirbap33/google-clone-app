@@ -18,10 +18,9 @@ import db from "../services/firebase";
 import SearchInput from "../components/SearchInput";
 import { StyledHeaderRight } from "../components/Home.Styled";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AppsIcon from "@mui/icons-material/Apps";
 import { Tooltip, IconButton } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
+import Authentication from "../components/Authentication";
 
 interface Result {
   search: string;
@@ -74,8 +73,8 @@ const SearchPage = () => {
                 />
               </IconButton>
             </Tooltip>
-
-            <Tooltip title="Google apps">
+            <Authentication />
+            {/*<Tooltip title="Google apps">
               <IconButton>
                 <AppsIcon
                   sx={{ fontSize: "1.5rem", color: "rgba(255,255,255,0.87)" }}
@@ -97,7 +96,7 @@ const SearchPage = () => {
               >
                 IG
               </Avatar>
-            </Tooltip>
+            </Tooltip> */}
           </StyledHeaderRight>
         </StyledSearchHeaderUpper>
         <StyledSearchHeaderLower>
